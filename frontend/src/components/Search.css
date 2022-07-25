@@ -1,0 +1,25 @@
+.search-form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.search-icon {
+  width: 24px;
+}
+
+.form-input {
+  font-family: var(--primary-font);
+  font-weight: var(--font-light);
+  font-size: calc(16rem / 16);
+  line-height: calc(20rem / 16);
+  color: var(--pure-white);
+  background: none;
+  border: none;
+  width: 100%;
+}
+
+.form-input::placeholder {
+  opacity: 0.5;
+}

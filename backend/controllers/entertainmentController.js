@@ -24,7 +24,26 @@ const getSingleEntertainment = async (req, res) => {
 const createEntertainment = async (req, res) => {
   const { title, year, category, rating, isBookmarked, isTrending, thumbnail } =
     req.body;
-  // add doc to db
+
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+  if (!year) {
+    emptyFields.push("year");
+  }
+  if (!category) {
+    emptyFields.push("category");
+  }
+  if (!rating) {
+    emptyFields.push("rating");
+  }
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in all required fields: ", emptyFields });
+  }
   try {
     const entertainment = await Entertainment.create({
       title,
@@ -54,7 +73,7 @@ const deleteEntertainment = async (req, res) => {
   res.status(200).json(entertainment);
 };
 
-// UPDATE a movie or TV series
+// Update a movie or TV series
 const updateEntertainment = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {

@@ -1,0 +1,134 @@
+.trending-li {
+  position: relative;
+  overflow: hidden;
+}
+
+.poster-wrapper,
+.trending-poster-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.poster-wrapper {
+  height: 110px;
+}
+
+.trending-poster-wrapper {
+  height: 140px;
+}
+
+.poster {
+  width: 100%;
+  object-fit: contain;
+}
+
+.bookmark-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--dark-blue-transparent);
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.text-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: var(--gradient);
+  padding: 16px;
+  border-radius: 0px 0px 8px 8px;
+}
+
+.details-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.trending-details-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail {
+  font-size: calc(11rem / 16);
+  line-height: calc(14rem / 16);
+  color: var(--white-transparent);
+}
+
+.trending-detail {
+  font-size: calc(12rem / 16);
+  line-height: calc(15rem / 16);
+  color: var(--white-transparent);
+}
+
+.circle {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--pure-white);
+  opacity: 0.5;
+}
+
+.trending-circle {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--pure-white);
+  opacity: 0.5;
+}
+
+.category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.category-icon {
+  width: 10px;
+}
+
+.trending-category-icon {
+  width: 12px;
+}
+
+.title {
+  font-weight: var(--font-medium);
+  font-size: calc(14rem / 16);
+  line-height: calc(18rem / 16);
+  margin-top: 4px;
+}
+
+.trending-title {
+  font-weight: var(--font-medium);
+  font-size: calc(15rem / 16);
+  line-height: calc(19rem / 16);
+  margin-top: 4px;
+}
+
+/* Media Queries */
+@media screen and (min-width: 576px) {
+  .poster-wrapper {
+    height: 140px;
+  }
+
+  .trending-poster-wrapper {
+    height: 230px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .poster-wrapper {
+    height: 174px;
+  }
+}

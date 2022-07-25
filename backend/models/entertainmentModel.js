@@ -29,13 +29,28 @@ const entertainmentSchema = new Schema({
   },
   thumbnail: {
     regular: {
-      small: String,
-      medium: String,
-      large: String,
+      small: {
+        type: String,
+        default: "./assets/thumbnails/default.jpg",
+      },
+      medium: {
+        type: String,
+        default: "./assets/thumbnails/default.jpg",
+      },
+      large: {
+        type: String,
+        default: "./assets/thumbnails/default.jpg",
+      },
     },
     trending: {
-      small: String,
-      large: String,
+      small: {
+        type: String,
+        default: "./assets/thumbnails/default.jpg",
+      },
+      large: {
+        type: String,
+        default: "./assets/thumbnails/default.jpg",
+      },
     },
   },
 });

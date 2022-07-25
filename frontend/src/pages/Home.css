@@ -1,0 +1,25 @@
+.trending {
+  padding-left: 16px;
+}
+
+.trending-carousel {
+  display: grid;
+  grid-template-columns: repeat(5, 240px);
+  gap: 16px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+/* Media Queries */
+
+@media screen and (min-width: 576px) {
+  .recommended-heading {
+    margin-top: 39px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .recommended-heading {
+    margin-top: 40px;
+  }
+}

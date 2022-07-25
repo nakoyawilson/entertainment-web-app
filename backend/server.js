@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const entertainmentRoutes = require("./routes/entertainment");
+const userRoutes = require("./routes/user");
 
 const app = express();
 const port = process.env.PORT;
@@ -17,14 +18,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
 app.use("/api/entertainment", entertainmentRoutes);
+app.use("/api/user", userRoutes);
 
-// Connect to database
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    // listen for requests
     app.listen(port, () => {
       console.log(`connected to db and listening on port ${port}`);
     });
