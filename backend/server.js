@@ -6,7 +6,7 @@ const entertainmentRoutes = require("./routes/entertainment");
 const userRoutes = require("./routes/user");
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
 // middleware
 
