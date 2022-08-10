@@ -11,7 +11,7 @@ const Search = ({ queryType }) => {
         type="text"
         id="search"
         placeholder={`Search for ${queryType}`}
-        className="form-input"
+        className="search-input"
       />
       <button aria-label="Search">
         <img src={searchIcon} alt="" className="search-icon" />

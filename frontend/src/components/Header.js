@@ -1,14 +1,31 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useLogout";
 import logo from "../assets/logo.svg";
 import avatar from "../assets/image-avatar.png";
 import "./Header.css";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { auth } = useAuthContext();
+  const { logout } = useLogout();
+  const [viewLogout, setViewLogout] = useState(false);
+
+  const toggleMenu = () => {
+    setViewLogout(!viewLogout);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <header className="header">
       <div className="container header-container">
         <img src={logo} alt="Entertainment web app logo" className="logo" />
-        <nav>
+        <nav className="navigation">
           <ul className="nav-ul">
             <li>
               <NavLink
@@ -58,35 +75,65 @@ const Header = () => {
                 </svg>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/bookmarked"
-                aria-label="Bookmarked"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-              >
-                <svg width="17" height="20" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M15.387 0c.202 0 .396.04.581.119.291.115.522.295.694.542.172.247.258.52.258.82v17.038c0 .3-.086.573-.258.82a1.49 1.49 0 0 1-.694.542 1.49 1.49 0 0 1-.581.106c-.423 0-.79-.141-1.098-.423L8.46 13.959l-5.83 5.605c-.317.29-.682.436-1.097.436-.202 0-.396-.04-.581-.119a1.49 1.49 0 0 1-.694-.542A1.402 1.402 0 0 1 0 18.52V1.481c0-.3.086-.573.258-.82A1.49 1.49 0 0 1 .952.119C1.137.039 1.33 0 1.533 0h13.854Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/add"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-              >
-                Add
-              </NavLink>
-            </li>
+            {auth && !auth.isAdmin && (
+              <li>
+                <NavLink
+                  to="/bookmarked"
+                  aria-label="Bookmarked"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  <svg
+                    width="17"
+                    height="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.387 0c.202 0 .396.04.581.119.291.115.522.295.694.542.172.247.258.52.258.82v17.038c0 .3-.086.573-.258.82a1.49 1.49 0 0 1-.694.542 1.49 1.49 0 0 1-.581.106c-.423 0-.79-.141-1.098-.423L8.46 13.959l-5.83 5.605c-.317.29-.682.436-1.097.436-.202 0-.396-.04-.581-.119a1.49 1.49 0 0 1-.694-.542A1.402 1.402 0 0 1 0 18.52V1.481c0-.3.086-.573.258-.82A1.49 1.49 0 0 1 .952.119C1.137.039 1.33 0 1.533 0h13.854Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </NavLink>
+              </li>
+            )}
+            {auth && auth.isAdmin && (
+              <li>
+                <NavLink
+                  to="/add"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="20"
+                    width="20"
+                  >
+                    <path
+                      d="M10 16.312q-.542 0-.948-.406-.406-.406-.406-.948v-3.604H5.042q-.542 0-.948-.406-.406-.406-.406-.948 0-.542.406-.948.406-.406.948-.406h3.604V5.042q0-.542.406-.948.406-.406.948-.406.542 0 .948.406.406.406.406.948v3.604h3.604q.542 0 .948.406.406.406.406.948 0 .542-.406.948-.406.406-.948.406h-3.604v3.604q0 .542-.406.948-.406.406-.948.406Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </NavLink>
+              </li>
+            )}
           </ul>
         </nav>
-        <img src={avatar} alt="" className="avatar" />
+        <button
+          aria-label="Account and settings menu"
+          onClick={toggleMenu}
+          className="account-btn"
+        >
+          <img src={avatar} alt="" className="avatar" />
+        </button>
+        {viewLogout && (
+          <div>
+            <button onClick={handleLogout} className="btn">
+              Logout
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

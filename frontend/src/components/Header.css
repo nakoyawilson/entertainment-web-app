@@ -39,10 +39,23 @@
   border-radius: 50%;
 }
 
+.add-icon {
+  width: 20px;
+}
+
+.account-btn:hover {
+  cursor: pointer;
+}
+
 /* Media Queries */
 @media screen and (min-width: 1440px) {
   .header-container,
   .nav-ul {
     flex-direction: column;
+  }
+
+  .navigation,
+  .account-btn {
+    margin-top: 75px;
   }
 }

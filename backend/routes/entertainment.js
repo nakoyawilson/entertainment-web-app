@@ -6,8 +6,11 @@ const {
   deleteEntertainment,
   updateEntertainment,
 } = require("../controllers/entertainmentController");
+const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
+
+router.use(requireAuth);
 
 // GET all entertainment
 router.get("/", getAllEntertainment);

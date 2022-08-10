@@ -10,6 +10,12 @@
   padding: 24px 0 61px;
 }
 
+.authentication-heading {
+  font-size: calc(32rem / 16);
+  line-height: calc(40rem / 16);
+  letter-spacing: -0.5px;
+}
+
 .section-heading {
   font-size: calc(20rem / 16);
   line-height: calc(25rem / 16);
@@ -43,10 +49,83 @@
   line-height: calc(19rem / 16);
   text-align: center;
   display: block;
+  width: 100%;
   padding: 14px 0 15px;
   border-radius: 6px;
   background: var(--red);
   color: var(--pure-white);
+  transition: all 0.5s ease-in-out;
+}
+
+.btn:hover {
+  background: var(--pure-white);
+  color: var(--dark-blue);
+  cursor: pointer;
+}
+
+.authentication-logo {
+  margin: 48px auto 0;
+  width: 33px;
+}
+
+.authentication-container {
+  background: var(--semi-dark-blue);
+  border-radius: 10px;
+  width: min(87.2%, 327px);
+  margin: 58px auto 0;
+}
+
+.authentication-form {
+  margin-top: 40px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper + .input-wrapper {
+  margin-top: 24px;
+}
+
+.form-input {
+  font-size: calc(15rem / 16);
+  line-height: calc(19rem / 16);
+  color: var(--pure-white);
+  padding: 0 16px 18px;
+  border-bottom: 1px solid var(--greyish-blue);
+  caret-color: var(--red);
+}
+
+.form-input.error {
+  border-bottom: 1px solid var(--red);
+}
+
+.form-input::placeholder {
+  opacity: 0.5;
+}
+
+.form-btn {
+  margin-top: 40px;
+}
+
+.paragraph {
+  font-size: calc(15rem / 16);
+  line-height: calc(19rem / 16);
+  text-align: center;
+  margin-top: 24px;
+}
+
+.link {
+  color: var(--red);
+}
+
+.input-error {
+  font-size: calc(13rem / 16);
+  line-height: calc(16rem / 16);
+  color: var(--red);
+  position: absolute;
+  top: 2px;
+  right: 17px;
 }
 
 /* Media Queries */
@@ -71,6 +150,12 @@
     grid-template-columns: repeat(3, 1fr);
     column-gap: 29px;
     row-gap: 24px;
+  }
+
+  .authentication-container {
+    border-radius: 20px;
+    width: 400px;
+    margin: 72px auto 0;
   }
 }
 
@@ -98,5 +183,9 @@
     grid-template-columns: repeat(auto-fit, 280px);
     column-gap: 29px;
     row-gap: 24px;
+  }
+
+  .authentication-container {
+    margin: 83px auto 0;
   }
 }

@@ -9,17 +9,13 @@
   width: 24px;
 }
 
-.form-input {
-  font-family: var(--primary-font);
-  font-weight: var(--font-light);
+.search-input {
   font-size: calc(16rem / 16);
   line-height: calc(20rem / 16);
   color: var(--pure-white);
-  background: none;
-  border: none;
   width: 100%;
 }
 
-.form-input::placeholder {
+.search-input::placeholder {
   opacity: 0.5;
 }

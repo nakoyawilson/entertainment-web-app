@@ -23,7 +23,7 @@
   object-fit: contain;
 }
 
-.bookmark-btn {
+.entertainment-btn {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -31,9 +31,28 @@
   justify-content: center;
   align-items: center;
   background: var(--dark-blue-transparent);
+}
+
+.entertainment-btn:hover {
+  cursor: pointer;
+}
+
+.bookmark-btn {
   position: absolute;
   top: 8px;
   right: 8px;
+}
+
+.admin-controls {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.admin-icon {
+  width: 20px;
 }
 
 .text-wrapper {

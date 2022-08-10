@@ -81,7 +81,8 @@ const updateEntertainment = async (req, res) => {
   }
   const entertainment = await Entertainment.findOneAndUpdate(
     { _id: id },
-    { ...req.body }
+    { ...req.body },
+    { new: true }
   );
   if (!entertainment) {
     return res.status(404).json({ error: "No such movie or TV series" });

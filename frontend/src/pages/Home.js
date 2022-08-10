@@ -1,29 +1,39 @@
 import { useEffect } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useEntertainmentContext } from "../hooks/useEntertainmentContext";
 import Search from "../components/Search";
+import Loader from "../components/Loader";
 import TrendingDetails from "../components/TrendingDetails";
 import EntertainmentDetails from "../components/EntertainmentDetails";
 import "./Home.css";
 
 const Home = () => {
   const { allEntertainment, dispatch } = useEntertainmentContext();
+  const { auth } = useAuthContext();
 
   useEffect(() => {
     const fetchEntertainment = async () => {
-      const response = await fetch("/api/entertainment");
+      const response = await fetch("/api/entertainment", {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      });
       const json = await response.json();
       if (response.ok) {
         dispatch({ type: "SET_ENTERTAINMENT", payload: json });
       }
     };
-    fetchEntertainment();
-  }, [dispatch]);
+    if (auth) {
+      fetchEntertainment();
+    }
+  }, [dispatch, auth]);
 
   return (
     <main className="main">
       <Search queryType="movies or TV series" />
       <section className="trending">
         <h2 className="section-heading">Trending</h2>
+        {!allEntertainment && <Loader />}
         <ul className="trending-carousel">
           {allEntertainment &&
             allEntertainment
@@ -35,6 +45,7 @@ const Home = () => {
         <h2 className="section-heading recommended-heading">
           Recommended for you
         </h2>
+        {!allEntertainment && <Loader />}
         <ul className="main-grid">
           {allEntertainment &&
             allEntertainment

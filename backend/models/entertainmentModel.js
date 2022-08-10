@@ -19,10 +19,6 @@ const entertainmentSchema = new Schema({
     type: String,
     reqiured: true,
   },
-  isBookmarked: {
-    type: Boolean,
-    default: false,
-  },
   isTrending: {
     type: Boolean,
     default: false,

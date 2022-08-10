@@ -19,22 +19,48 @@ const userSchema = new Schema({
     required: true,
     default: false,
   },
+  bookmarks: [{ type: Schema.Types.ObjectId, ref: "Entertainment" }],
 });
 
-userSchema.statics.signup = async function (email, password) {
-  if (!email || !password) {
-    throw Error("All fields must be filled");
+userSchema.statics.signup = async function (email, password, repeatPassword) {
+  let errors = {
+    email: "",
+    password: "",
+    repeatPassword: "",
+  };
+
+  if (!email) {
+    errors.email = "Can't be empty";
+  } else if (!validator.isEmail(email)) {
+    errors.email = "Email not valid";
   }
-  if (!validator.isEmail(email)) {
-    throw Error("Email address is not valid");
+
+  if (!password) {
+    errors.password = "Can't be empty";
+  } else if (!validator.isStrongPassword(password)) {
+    errors.password = "Not strong enough";
   }
-  if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough");
+
+  if (!repeatPassword) {
+    errors.repeatPassword = "Can't be empty";
   }
+
+  if (!Object.values(errors).every((error) => error === "")) {
+    throw Error(JSON.stringify(errors));
+  }
+
+  if (password !== repeatPassword) {
+    errors.password = "Must match";
+    errors.repeatPassword = "Must match";
+    throw Error(JSON.stringify(errors));
+  }
+
   const exists = await this.findOne({ email });
   if (exists) {
-    throw Error("Email already in use");
+    errors.email = "Already in use";
+    throw Error(JSON.stringify(errors));
   }
+
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
   const user = await this.create({ email, password: hash });
@@ -42,20 +68,36 @@ userSchema.statics.signup = async function (email, password) {
 };
 
 userSchema.statics.login = async function (email, password) {
-  if (!email || !password) {
-    throw Error("All fields must be filled");
+  let errors = {
+    email: "",
+    password: "",
+  };
+
+  if (!email) {
+    errors.email = "Can't be empty";
+  } else if (!validator.isEmail(email)) {
+    errors.email = "Email not valid";
+  }
+
+  if (!password) {
+    errors.password = "Can't be empty";
+  }
+
+  if (!Object.values(errors).every((error) => error === "")) {
+    throw Error(JSON.stringify(errors));
   }
 
   const user = await this.findOne({ email });
   if (!user) {
-    throw Error("Incorrect email");
+    errors.email = "Incorrect email";
+    throw Error(JSON.stringify(errors));
   }
 
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    throw Error("Incorrect password");
+    errors.password = "Incorrect password";
+    throw Error(JSON.stringify(errors));
   }
-
   return user;
 };
 

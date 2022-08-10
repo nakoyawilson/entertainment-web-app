@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useEntertainmentContext } from "../hooks/useEntertainmentContext";
 
 const EntertainmentForm = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { auth } = useAuthContext();
   const { singleEntertainment, dispatch } = useEntertainmentContext();
   const [title, setTitle] = useState("");
   const [year, setYear] = useState(1900);
@@ -18,6 +20,10 @@ const EntertainmentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!auth) {
+      // setError("You must be logged in");
+      return;
+    }
 
     const entertainment = {
       title,
@@ -38,6 +44,7 @@ const EntertainmentForm = () => {
         body: JSON.stringify(entertainment),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         },
       }
     );
@@ -81,13 +88,18 @@ const EntertainmentForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title" className="sr-only">
+          Title
+        </label>
         <input
           type="text"
           id="title"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-          className={emptyFields.includes("title") ? "error" : ""}
+          placeholder="Title"
+          className={`form-input ${
+            emptyFields.includes("title") ? "error" : ""
+          }`}
         />
       </div>
       <div>

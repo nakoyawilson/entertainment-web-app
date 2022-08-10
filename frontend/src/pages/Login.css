@@ -1,0 +1,14 @@
+.login {
+  padding: 24px 24px 32px;
+}
+
+.demo-btn {
+  margin-top: 16px;
+}
+
+/* Media Queries */
+@media screen and (min-width: 576px) {
+  .login {
+    padding: 32px;
+  }
+}

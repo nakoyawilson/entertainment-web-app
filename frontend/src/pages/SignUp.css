@@ -1,0 +1,10 @@
+.signup {
+  padding: 24px 24px 16px;
+}
+
+/* Media Queries */
+@media screen and (min-width: 576px) {
+  .signup {
+    padding: 32px;
+  }
+}
