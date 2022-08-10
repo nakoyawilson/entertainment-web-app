@@ -13,7 +13,7 @@ import "./EntertainmentDetails.css";
 const EntertainmentDetails = ({ item }) => {
   const { auth, dispatch } = useAuthContext();
   const [bookmark, setBookmark] = useState(
-    auth.bookmarks.includes(item._id) ? true : false
+    auth.bookmarks && auth.bookmarks.includes(item._id) ? true : false
   );
   const navigate = useNavigate();
   const { dispatch: entertainmentDispatch } = useEntertainmentContext();

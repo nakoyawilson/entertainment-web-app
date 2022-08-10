@@ -14,7 +14,7 @@ const TrendingDetails = ({ item }) => {
   const navigate = useNavigate();
   const { auth, dispatch } = useAuthContext();
   const [bookmark, setBookmark] = useState(
-    auth.bookmarks.includes(item._id) ? true : false
+    auth.bookmarks && auth.bookmarks.includes(item._id) ? true : false
   );
 
   const { dispatch: entertainmentDispatch } = useEntertainmentContext();
