@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server",
+    "start": "cross-env NODE_ENV=production node backend/server && yarn frontend:install && yarn frontend:build",
     "dev": "nodemon backend/server",
     "frontend": "yarn --cwd frontend run start",
     "frontend:install": "yarn --cwd frontend add react-scripts --save”",
