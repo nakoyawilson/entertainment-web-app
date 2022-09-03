@@ -29,7 +29,9 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(port, () => {
-      console.log(`connected to db & listening on port ${port}`);
+      console.log(
+        `Server running in ${process.env.NODE_ENV} mode on port ${port}`
+      );
     });
   })
   .catch((error) => {
