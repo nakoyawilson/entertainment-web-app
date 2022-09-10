@@ -6,6 +6,7 @@ import Movies from "./pages/Movies";
 import SignUp from "./pages/SignUp";
 import TVSeries from "./pages/TVSeries";
 import Entertainment from "./pages/Entertainment";
+import HealthCheck from "./pages/HealthCheck";
 import Header from "./components/Header";
 import { useAuthContext } from "./hooks/useAuthContext";
 import "./App.css";
@@ -50,6 +51,7 @@ const App = () => {
             path="edit"
             element={auth ? <Entertainment /> : <Navigate to="/login" />}
           />
+          <Route path="healthcheck" element={<HealthCheck />} />
           <Route
             path="*"
             element={
